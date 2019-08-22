@@ -1,13 +1,21 @@
 defmodule Rollout.MixProject do
   use Mix.Project
 
+  @version "0.1.0"
+
   def project do
     [
       app: :rollout,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+
+      description: description(),
+      package: package(),
+      name: "Rollout",
+      source_url: "https://github.com/keathley/rollout",
+      docs: docs(),
     ]
   end
 
@@ -22,7 +30,31 @@ defmodule Rollout.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:hlcid, path: "../hlcid"},
+      {:hlclock, "~> 1.0"},
+    ]
+  end
+
+  def description do
+    """
+    Rollout allows you to flip features quickly and easily. It relies on
+    distributed erlang and uses LWW-register CRDTs and Hybrid-logical clocks
+    to provide maximum availability.
+    """
+  end
+
+  def package do
+    [
+      name: "rollout",
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/keathley/rollout"},
+    ]
+  end
+
+  def docs do
+    [
+      source_ref: "v#{@version}",
+      source_url: "https://github.com/keathley/rollout",
+      main: "Rollout",
     ]
   end
 end
