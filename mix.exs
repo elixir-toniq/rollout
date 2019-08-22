@@ -31,14 +31,15 @@ defmodule Rollout.MixProject do
   defp deps do
     [
       {:hlclock, "~> 1.0"},
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 
   def description do
     """
     Rollout allows you to flip features quickly and easily. It relies on
-    distributed erlang and uses LWW-register CRDTs and Hybrid-logical clocks
-    to provide maximum availability.
+    distributed erlang and uses LWW-Registers and Hybrid-logical clocks
+    to provide maximum availability and low latency.
     """
   end
 

@@ -1,5 +1,11 @@
 defmodule Rollout.Storage do
   @moduledoc false
+  # This module provides a server for maintaining flags. It monitors node
+  # connects in order to propogate existing flag information. Currently it
+  # manages the ets table we're using for holding the value for each flag.
+  # This isn't a great design because if we crash we lose the ets table.
+  # We should make that ets table public and move its creation to a supervisor
+  # or application start.
 
   use GenServer
 
