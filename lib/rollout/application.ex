@@ -8,6 +8,7 @@ defmodule Rollout.Application do
 
     children = [
       {HLClock, name: Rollout.Clock, node_id: node_id},
+      {Rollout.ClockSync, [sync_interval: 3_000, clock: Rollout.Clock]},
       {Rollout.Storage, []}
     ]
 
