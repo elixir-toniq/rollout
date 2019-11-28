@@ -15,6 +15,8 @@ defmodule Rollout.Storage do
     GenServer.start_link(__MODULE__, args, name: __MODULE__)
   end
 
+  # Lookup the percentage for a flag. This is done in the client process in order
+  # to speed up lookups and not cause a bottleneck.
   def percentage(flag) do
     case :ets.lookup(__MODULE__, flag) do
       [] ->
@@ -25,6 +27,7 @@ defmodule Rollout.Storage do
     end
   end
 
+  # The main api for setting the activation percentage of a flag.
   def set_percentage(flag, percentage) do
     GenServer.call(__MODULE__, {:set_percentage, flag, percentage})
   end
