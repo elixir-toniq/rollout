@@ -37,26 +37,24 @@ defmodule Rollout do
 
   ## How does Rollout work?
 
-  Rollout maintains a LWW Register for each flag that has been activated or
-  deactivated. These Registers use hybrid logical clocks (HLC) for causality
-  tracking. When a flag is activated or deactivated we update the HLC for that
-  register and propogate the register across the cluster. When merging registers
-  we always take register with the latest HLC. After merging is
-  done we store the values for each register into an ets table for fast lookups.
+  Rollout utilizes [Groot](https://github.com/keathley/groot) for replicating flags
+  across your cluster. Please look at the groot docs for implementation details.
   """
-
-  alias Rollout.Storage
+  use Norm
 
   @doc """
   Checks to see if a feature is active or not.
   """
   def active?(flag) do
-    case Storage.percentage(flag) do
-      100 ->
-        true
+    case Groot.get(flag) do
+      nil ->
+        false
 
       0 ->
         false
+
+      100 ->
+        true
 
       val ->
         :rand.uniform(100) <= val
@@ -67,7 +65,14 @@ defmodule Rollout do
   Fully activates a feature flag.
   """
   def activate(flag) do
-    Storage.set_percentage(flag, 100)
+    activate_percentage(flag, 100)
+  end
+
+  @doc """
+  Disables a feature flag.
+  """
+  def deactivate(flag) do
+    activate_percentage(flag, 0)
   end
 
   @doc """
@@ -76,14 +81,7 @@ defmodule Rollout do
   calculation: `:rand.uniform(100) <= provided_percentage`
   """
   def activate_percentage(flag, percentage) when is_integer(percentage) and 0 <= percentage and percentage <= 100 do
-    Storage.set_percentage(flag, percentage)
-  end
-
-  @doc """
-  Disables a feature flag.
-  """
-  def deactivate(flag) do
-    Storage.set_percentage(flag, 0)
+    Groot.set(flag, percentage)
   end
 end
 

@@ -1,8 +1,13 @@
 %{
   "earmark": {:hex, :earmark, "1.3.5", "0db71c8290b5bc81cb0101a2a507a76dca659513984d683119ee722828b424f6", [:mix], [], "hexpm"},
   "ex_doc": {:hex, :ex_doc, "0.21.1", "5ac36660846967cd869255f4426467a11672fec3d8db602c429425ce5b613b90", [:mix], [{:earmark, "~> 1.3", [hex: :earmark, repo: "hexpm", optional: false]}, {:makeup_elixir, "~> 0.14", [hex: :makeup_elixir, repo: "hexpm", optional: false]}], "hexpm"},
+  "global_flags": {:hex, :global_flags, "1.0.0", "ee6b864979a1fb38d1fbc67838565644baf632212bce864adca21042df036433", [:rebar3], [], "hexpm"},
+  "groot": {:hex, :groot, "0.1.0", "22f8e1a9b22500534f8fe99961ac882debd3adc53719b77253ae92f00be71275", [:mix], [{:hlclock, "~> 1.0", [hex: :hlclock, repo: "hexpm", optional: false]}], "hexpm"},
   "hlclock": {:hex, :hlclock, "1.0.0", "7a72fc7a20a9382499216227edf97a8b118e21fc3fcad0e81b8d10c616ce1431", [:mix], [], "hexpm"},
+  "local_cluster": {:hex, :local_cluster, "1.1.0", "a2a0e3e965aa1549939108066bfa537ce89f0107917f5b0260153e2fdb304116", [:mix], [{:global_flags, "~> 1.0", [hex: :global_flags, repo: "hexpm", optional: false]}], "hexpm"},
   "makeup": {:hex, :makeup, "1.0.0", "671df94cf5a594b739ce03b0d0316aa64312cee2574b6a44becb83cd90fb05dc", [:mix], [{:nimble_parsec, "~> 0.5.0", [hex: :nimble_parsec, repo: "hexpm", optional: false]}], "hexpm"},
   "makeup_elixir": {:hex, :makeup_elixir, "0.14.0", "cf8b7c66ad1cff4c14679698d532f0b5d45a3968ffbcbfd590339cb57742f1ae", [:mix], [{:makeup, "~> 1.0", [hex: :makeup, repo: "hexpm", optional: false]}], "hexpm"},
   "nimble_parsec": {:hex, :nimble_parsec, "0.5.1", "c90796ecee0289dbb5ad16d3ad06f957b0cd1199769641c961cfe0b97db190e0", [:mix], [], "hexpm"},
+  "norm": {:hex, :norm, "0.10.0", "008844973a3f7ae1f86e206eda1e55ca46822e70dffa9e0cc214de7d0c0373bb", [:mix], [], "hexpm"},
+  "schism": {:hex, :schism, "1.0.1", "b700883b4023b06faa5ab4add3aba5706877feb0a3dcfe8127b5dfeefe2513a5", [:mix], [], "hexpm"},
 }
