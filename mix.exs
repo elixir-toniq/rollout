@@ -10,6 +10,7 @@ defmodule Rollout.MixProject do
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      aliases: aliases(),
 
       description: description(),
       package: package(),
@@ -22,16 +23,24 @@ defmodule Rollout.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
-      mod: {Rollout.Application, []}
     ]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:hlclock, "~> 1.0"},
+      {:groot, "~> 0.1"},
+      {:norm, "~> 0.10"},
+
+      {:local_cluster, "~> 1.0", only: [:dev, :test]},
+      {:schism, "~> 1.0", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev}
+    ]
+  end
+
+  def aliases do
+    [
+      test: ["test --no-start"]
     ]
   end
 

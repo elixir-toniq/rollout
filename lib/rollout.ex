@@ -44,19 +44,25 @@ defmodule Rollout do
   we always take register with the latest HLC. After merging is
   done we store the values for each register into an ets table for fast lookups.
   """
+  use Norm
 
-  alias Rollout.Storage
+  defp flag, do: spec(fn _ -> true end)
+  defp percentage, do: spec(is_integer() and &(0 <= &1 and &1 <= 100))
 
   @doc """
   Checks to see if a feature is active or not.
   """
+  @contract active?(flag :: flag()) :: spec(is_boolean())
   def active?(flag) do
-    case Storage.percentage(flag) do
-      100 ->
-        true
+    case Groot.get(flag) do
+      nil ->
+        false
 
       0 ->
         false
+
+      100 ->
+        true
 
       val ->
         :rand.uniform(100) <= val
@@ -66,8 +72,17 @@ defmodule Rollout do
   @doc """
   Fully activates a feature flag.
   """
+  @contract activate(flag :: flag()) :: :ok
   def activate(flag) do
-    Storage.set_percentage(flag, 100)
+    activate_percentage(flag, 100)
+  end
+
+  @doc """
+  Disables a feature flag.
+  """
+  @contract deactivate(flag :: flag()) :: :ok
+  def deactivate(flag) do
+    activate_percentage(flag, 0)
   end
 
   @doc """
@@ -75,15 +90,9 @@ defmodule Rollout do
   must be provided. Deciding whether a flag is active is done with the following
   calculation: `:rand.uniform(100) <= provided_percentage`
   """
-  def activate_percentage(flag, percentage) when is_integer(percentage) and 0 <= percentage and percentage <= 100 do
-    Storage.set_percentage(flag, percentage)
-  end
-
-  @doc """
-  Disables a feature flag.
-  """
-  def deactivate(flag) do
-    Storage.set_percentage(flag, 0)
+  @contract activate_percentage(flag :: flag(), percentage :: percentage()) :: :ok
+  def activate_percentage(flag, percentage) do
+    Groot.set(flag, percentage)
   end
 end
 
