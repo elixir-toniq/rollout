@@ -49,12 +49,8 @@ checking if a flag is enabled.
 
 ## How does Rollout work?
 
-Rollout maintains a LWW Register for each flag that has been activated or
-deactivated. These Registers use hybrid logical clocks (HLC) for causality
-tracking. When a flag is activated or deactivated we update the HLC for that
-register and propogate that change across the cluster. When merging registers
-across the cluster we always take register with the latest HLC. After merging is
-done we store the values for each register into an ets table for fast lookups.
+Rollout utilizes [Groot](https://github.com/keathley/groot) for replicating flags
+across your cluster. Please look at the groot docs for implementation details.
 
 ## Caveats
 
@@ -68,17 +64,14 @@ will be caught up on the current state. But if you bring up an entirely new clus
 your flags will revert to their default states. You can mitigate this problem
 by setting defaults for each flag in your `Application.start/2` callback.
 
-Because we're using CRDTs to propogate changes its possible that a change made
-on one node will take time to propogate to the other nodes. Its a safe operation
-to run the same operation on multiple nodes. When feature flags are merged we
-also default to the latest HLC.
+Changes made on one node will take time to replicate to other nodes in the cluster.
+But, its a safe operation to run the same command on multiple nodes. Feature flags
+will merge cleanly and always default to the latest change seen.
 
 ## Should I use this?
 
-For now I'd say "No". The functionality works but this repo currently has 0
-tests and I'm sure there are edge cases. You should also not cluster your
-application for the sole purpose of using this library. If you need this
-you'll know it. Otherwise you're better off looking at an alternative solution.
+If you're already running a clustered application then this should be a reasonable
+solution if you need feature flags.
 
 ## Future work
 
