@@ -13,7 +13,7 @@ critical path of a request with minimal latency increase.
 ```elixir
 def deps do
   [
-    {:rollout, "~> 0.1"}
+    {:rollout, "~> 0.2"}
   ]
 end
 ```
