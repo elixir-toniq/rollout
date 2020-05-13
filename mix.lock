@@ -8,6 +8,6 @@
   "makeup": {:hex, :makeup, "1.0.1", "82f332e461dc6c79dbd82fbe2a9c10d48ed07146f0a478286e590c83c52010b5", [:mix], [{:nimble_parsec, "~> 0.5.0", [hex: :nimble_parsec, repo: "hexpm", optional: false]}], "hexpm", "49736fe5b66a08d8575bf5321d716bac5da20c8e6b97714fec2bcd6febcfa1f8"},
   "makeup_elixir": {:hex, :makeup_elixir, "0.14.0", "cf8b7c66ad1cff4c14679698d532f0b5d45a3968ffbcbfd590339cb57742f1ae", [:mix], [{:makeup, "~> 1.0", [hex: :makeup, repo: "hexpm", optional: false]}], "hexpm", "d4b316c7222a85bbaa2fd7c6e90e37e953257ad196dc229505137c5e505e9eff"},
   "nimble_parsec": {:hex, :nimble_parsec, "0.5.3", "def21c10a9ed70ce22754fdeea0810dafd53c2db3219a0cd54cf5526377af1c6", [:mix], [], "hexpm", "589b5af56f4afca65217a1f3eb3fee7e79b09c40c742fddc1c312b3ac0b3399f"},
-  "norm": {:hex, :norm, "0.10.4", "3243baed73db6c9b54175a8f473bdac20f311a2b39415e3de0a6d205df767492", [:mix], [], "hexpm", "51884375a00a6f0c7206612543e268435662808c817f787bb3b544617f6a9174"},
+  "norm": {:hex, :norm, "0.12.0", "b27a629fea9aaf7757604e9d4ed06cd815c2c5fb335f38b33c1bf17db9b217b0", [:mix], [], "hexpm", "aecd53df72219966d9493e3426a32d83490c822ef618ef442721b1ae68cb6f0c"},
   "schism": {:hex, :schism, "1.0.1", "b700883b4023b06faa5ab4add3aba5706877feb0a3dcfe8127b5dfeefe2513a5", [:mix], [], "hexpm", "23080d2e0b4490eb2e207c8fee71d34bc0e58cc4f0f6879ca06b8fabe0c531ca"},
 }
