@@ -40,11 +40,11 @@ defmodule Rollout do
   Rollout utilizes [Groot](https://github.com/keathley/groot) for replicating flags
   across your cluster. Please look at the groot docs for implementation details.
   """
-  use Norm
 
   @doc """
   Checks to see if a feature is active or not.
   """
+  @spec active?(term()) :: boolean()
   def active?(flag) do
     case Groot.get(flag) do
       nil ->
@@ -64,6 +64,7 @@ defmodule Rollout do
   @doc """
   Fully activates a feature flag.
   """
+  @spec activate(term()) :: :ok
   def activate(flag) do
     activate_percentage(flag, 100)
   end
@@ -71,6 +72,7 @@ defmodule Rollout do
   @doc """
   Disables a feature flag.
   """
+  @spec deactivate(term()) :: :ok
   def deactivate(flag) do
     activate_percentage(flag, 0)
   end
@@ -80,6 +82,7 @@ defmodule Rollout do
   must be provided. Deciding whether a flag is active is done with the following
   calculation: `:rand.uniform(100) <= provided_percentage`
   """
+  @spec activate_percentage(term(), 0..100) :: :ok
   def activate_percentage(flag, percentage) when is_integer(percentage) and 0 <= percentage and percentage <= 100 do
     Groot.set(flag, percentage)
   end

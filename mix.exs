@@ -32,6 +32,7 @@ defmodule Rollout.MixProject do
       {:groot, "~> 0.1"},
       {:norm, "~> 0.10"},
 
+      {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
       {:local_cluster, "~> 1.0", only: [:dev, :test]},
       {:schism, "~> 1.0", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev}
